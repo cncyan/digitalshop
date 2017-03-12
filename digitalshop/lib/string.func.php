@@ -1,4 +1,15 @@
 <?php
-echo md5("cyan");
-$sql="insert cyan_admin(username,password,email) values ('cyan','6411532ba4971f378391776a9db629d3','cncyan@163.com')";
-echo $sql;
+function buildrandomstring($type=1,$length=4){
+if($type==1){
+	$chars=join("",range(0,9));	
+	}elseif($type==2){
+		$chars=join("",array_merge(range("a","z"),range("A","Z")));
+		}elseif($type==3){
+			$chars=join("",array_merge(range("a","z"),range("A","Z"),range(0,9)));
+			}
+if($length>strlen($chars)){
+	exit("字符段不够长");
+	}
+$chars=str_shuffle($chars);
+return substr($chars,0,$length);
+}
