@@ -9,12 +9,12 @@ function connect(){
     return $link;	
 }
 /*数据库的插入*/
-function insert($table,$arrsy){
+function insert($table,$array){
 	$keys=join(",",array_keys($array));
 	$vals="'".join(",",array_values($array))."'";
     $sql="insert {$table}({$keys}) values({$vals})";
-	mysql_query($sql);
-	return mysql_insert_id();	
+	mysqli_query(connect(),$sql);
+	return mysqli_insert_id();	
 }
 /*数据库更新*/
 function update($table,$array,$where=null){
@@ -24,18 +24,18 @@ function update($table,$array,$where=null){
 		}else{
 			$sep=",";
 		}
-		$str=$sep.$key."='".$val."'";
+		$str.=$sep.$key."='".$val."'";
 	}
-	$sql="update {$table} set {$str}".(where==null?null:"where".$where);
-	mysql_query($sql);
-	mysql_affected_rows();
+	$sql="update {$table} set {$str}".(where==null?null:" where ".$where);
+	$result=mysqli_query(connect(),$sql);
+	return $result;
 }
 /*数据库删除*/
 function delt($table,$where){
-	$where=$where==null?null:"where".$where;
+	$where=$where==null?null:"where ".$where;
 	$sql="delete from {$table} {$where}";
-	mysql_query($sql);
-	mysql_affected_rows();
+	$result=mysqli_query(connect(),$sql);
+	return $result;
 }
 /*查询单条数组*/
 function fetchone($sql){
@@ -44,12 +44,12 @@ function fetchone($sql){
 	return $row;
 }
 /*多条数组查询*/
-function fetchall($sql,$result_type=MYSQL_ASSOC){
-	$result=mysql_query($sql);
-	while(@$row=mysql_fetch_array($result,$result_type)){
-		$row[]=$row;
+function fetchall($sql){
+	$result=mysqli_query(connect(),$sql);
+	while($row=mysqli_fetch_assoc($result)){
+		$rows[]=$row;
 	}
-	return $row;
+	return $rows;
 }
 /*查询到的条数*/
 function getresultnum($sql){
