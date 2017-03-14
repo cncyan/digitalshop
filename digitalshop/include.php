@@ -11,5 +11,6 @@ require_once 'common.func.php';
 require_once 'uploade.func.php';
 require_once 'config.php';
 require_once 'admin.inc.php';
+require_once 'cate.inc.php';
 connect();
 

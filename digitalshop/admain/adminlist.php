@@ -1,6 +1,7 @@
 <?php
 require_once "../include.php";
-$rows=getalladmin();
+$pagesize=1;
+$rows=getalladminbypage($pagesize);
 if($rows==null){
 	echo "<script>alert('error');</script>";
 	exit;
@@ -19,6 +20,12 @@ if($rows==null){
 <div class="cont">
                 <div class="title">管理员列表</div>
                 <div class="details">
+                <div class="details_operation clearfix">
+                        <div class="details_operation clearfix">
+                        <div class="bui_select">
+                            <input type="button" value="添&nbsp;&nbsp;加" onClick="turnadd()" class="add">
+                        </div>
+                      </div> 
                     <table class="table" cellspacing="0" cellpadding="0">
                         <thead>
                             <tr>
@@ -29,14 +36,19 @@ if($rows==null){
                             </tr>
                         </thead>
                         <tbody>
-                        <?php $i=1;foreach($rows as $row):?>
+                        <?php foreach($rows as $row):?>
                             <tr>
-                                <td><input type="checkbox" id="c1" class="check"><label for="c1" class="label"><?php echo $i;?></label></td>
+                                <td><input type="checkbox" id="c1" class="check"><label for="c1" class="label"><?php echo $row['id'];?></label></td>
                                 <td><?php echo $row['username'];?></td>
                                 <td><?php echo $row['email'];?></td>
                                 <td align="center"><input type="button" onClick="editadmin(<?php echo $row['id'];?>)" value="修改" class="btn"><input type="button" onClick="deladmin(<?php echo $row['id']?>)" value="删除" class="btn"></td>
                             </tr>
-                            <?php $i++;endforeach;?>
+                            <?php endforeach;?>
+                            <?php if($rows>$pagesize)://sizeof($rows)无效?>
+                            <tr>
+                                <td colspan="4"><?php echo showpage($page,$totalpage);?></td>
+                            </tr>
+                            <?php endif;?>
                         </tbody>
                     </table>
                 </div>
@@ -50,6 +62,9 @@ if($rows==null){
 						window.location="doadminaction.php?act=deladmin&id="+id;
 						}
 					}
+			    function turnadd(){
+					   window.location="addadmin.php";
+					   }
                 </script>
 </body>
 </html>

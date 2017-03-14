@@ -41,6 +41,23 @@ function getalladmin(){
 	$row=fetchall($sql);
 	return $row;
 	}
+function getalladminbypage($pagesize){        //加分页显示
+	$sql="select * from cyan_admin";
+	$totalrows=getresultnum($sql);
+	global $totalpage,$page;
+	$totalpage=ceil($totalrows/$pagesize);
+	$page=$_REQUEST['page']?(int)$_REQUEST['page']:1;
+	if($page<1||$page==null||!is_numeric($page)){
+		$page=1;
+		}
+	if($page>$totalpage){
+		$page=$totalpage;
+		}
+	$offset=($page-1)*$pagesize;
+	$sql="select * from cyan_admin limit {$offset},{$pagesize}";
+	$rows=fetchall($sql);
+	return $rows;
+	}
 /*编辑管理员*/
 function editadmin($id){
 	$arr=$_POST;

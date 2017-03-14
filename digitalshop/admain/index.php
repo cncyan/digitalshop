@@ -37,10 +37,10 @@ checklogin();
                 <div class="title">管理员</div>
                 <ul class="mList">
                     <li>
-                        <h3><span>-</span>商品管理</h3>
+                        <h3><span>-</span>类别管理</h3>
                         <dl>
-                            <dd><a href="#">商品修改</a></dd>
-                            <dd><a href="#">商品分类</a></dd>
+                            <dd><a href="addcate.php" target="myframe">添加类别</a></dd>
+                            <dd><a href="catelist.php" target="myframe">类别列表</a></dd>
                         </dl>
                     </li>
                     <li>
