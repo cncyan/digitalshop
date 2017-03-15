@@ -1,6 +1,6 @@
 <?php
 require_once "../include.php";
-$pagesize=1;
+$pagesize=3;
 $rows=getalladminbypage($pagesize);
 if($rows==null){
 	echo "<script>alert('error');</script>";
@@ -44,7 +44,7 @@ if($rows==null){
                                 <td align="center"><input type="button" onClick="editadmin(<?php echo $row['id'];?>)" value="修改" class="btn"><input type="button" onClick="deladmin(<?php echo $row['id']?>)" value="删除" class="btn"></td>
                             </tr>
                             <?php endforeach;?>
-                            <?php if($rows>$pagesize)://sizeof($rows)无效?>
+                            <?php if($totalrows>$pagesize)://sizeof($rows)无效?>
                             <tr>
                                 <td colspan="4"><?php echo showpage($page,$totalpage);?></td>
                             </tr>

@@ -43,6 +43,7 @@ function getalladmin(){
 	}
 function getalladminbypage($pagesize){        //加分页显示
 	$sql="select * from cyan_admin";
+	global $totalrows;
 	$totalrows=getresultnum($sql);
 	global $totalpage,$page;
 	$totalpage=ceil($totalrows/$pagesize);

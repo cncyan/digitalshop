@@ -16,9 +16,9 @@ function getallcate(){
 	return $rows;
 	}
 function getallcatebypage($pagesize){
+	global $totalpage,$page,$totalrows;
 	$sql="select * from cyan_cate";
 	$totalrows=getresultnum($sql);
-	global $totalpage,$page;
 	$totalpage=ceil($totalrows/$pagesize);
 	$page=$_REQUEST['page']?(int)$_REQUEST['page']:1;
 	if($page<1||$page==null||!is_numeric($page)){

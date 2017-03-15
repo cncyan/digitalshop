@@ -13,3 +13,13 @@ if($length>strlen($chars)){
 $chars=str_shuffle($chars);
 return substr($chars,0,$length);
 }
+
+//获得唯一字符串
+function getunidstr(){
+	return md5(uniqid(microtime(true),true));
+	}
+//获取扩展名
+function getext($filename){
+	$tep_name=explode(".",$filename);
+	return strtolower(end($tep_name));
+	}

@@ -43,7 +43,7 @@ if($rows==null){
                                 <input type="button" value="删除" onClick="delcate(<?php echo $row['id'];?>)" class="btn"></td>
                             </tr>
                          <?php endforeach;?>
-                         <?php if($rows>$pagesize)://sizeof($rows)无效?>
+                         <?php if($totalrows>$pagesize)://sizeof($rows)无效?>
                             <tr>
                                 <td colspan="4"><?php echo showpage($page,$totalpage);?></td>
                             </tr>
