@@ -10,7 +10,9 @@ if($act=="logout"){
 		$mes=editadmin($id);
 		}elseif($act=="deladmin"){
 			$mes=deladmin($id);
-			}
+			}elseif($act=="addpro"){
+				$mes=addpro();
+				}
 ?>
 <!doctype html>
 <html>

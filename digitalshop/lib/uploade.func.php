@@ -2,7 +2,7 @@
 require_once '../lib/string.func.php';
 header("content-type=text/htme;charset=utf-8");
 //文件上传原理
-function uploadeone($fileinfo,$path="upload",$allowtype=array("jpg","png","gif"),$maxsize=512000,$imgflag=true){
+function uploadeone($fileinfo,$path="upload",$allowtype=array("jpg","png","gif","txt"),$maxsize=512000,$imgflag=false){
 	if($fileinfo['error']==0){
 		if(!file_exists($path)){                //如果文件夹不存在先创建文件夹
 				mkdir($path,0777,true);
@@ -76,7 +76,6 @@ function douploade($path="upload",$allowtype=array("jpg","png","gif","txt"),$max
 			}
 	$i=0;
 	$fileinfos=buildfile();
-	var_dump($fileinfos);die;
 	if(!($fileinfos&&is_array($fileinfos))){
 		return ;
 	}

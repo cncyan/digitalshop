@@ -44,10 +44,10 @@ checklogin();
                         </dl>
                     </li>
                     <li>
-                        <h3><span>+</span>订单管理</h3>
+                        <h3><span>+</span>商品管理</h3>
                         <dl>
-                            <dd><a href="#">订单修改</a></dd>
-                            <dd><a href="#">订单又修改</a></dd>
+                            <dd><a href="addpro.php" target="myframe">添加商品</a></dd>
+                            <dd><a href="prolist.php" target="myframe">商品列表</a></dd>
                             <dd><a href="#">订单总是修改</a></dd>
                             <dd><a href="#">测试内容你看着改</a></dd>
                         </dl>
@@ -63,7 +63,7 @@ checklogin();
             </div>
         </div>
 		<div class="main">           
-         <iframe name="myframe" src="main.php" width="100%" id="myframe" scrolling=no height="100%" class="mian_con"></frame>
+         <iframe name="myframe" src="main.php" width="100%" id="myframe" scrolling=no height="500" class="mian_con"></frame>
         </div>
 
     </div>

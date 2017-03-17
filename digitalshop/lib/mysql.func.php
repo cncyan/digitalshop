@@ -57,3 +57,7 @@ function getresultnum($sql){
 	$rows=mysqli_num_rows($result);
 	return $rows;
 }
+/*获得插入数据的id*/
+function getinsertid(){
+	return mysqli_insert_id(connect());
+	}

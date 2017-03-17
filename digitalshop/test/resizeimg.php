@@ -28,8 +28,6 @@ imagedestroy($dsc_800_image);*/
 
 
 require_once '../lib/string.func.php';
-$filename="des_big.jpg";
-thumb($filename,"upload/");
 
 
 

@@ -51,3 +51,4 @@ function delcate($id){
 			}
 		return $mes;
 	}
+	

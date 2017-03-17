@@ -12,5 +12,8 @@ require_once 'uploade.func.php';
 require_once 'config.php';
 require_once 'admin.inc.php';
 require_once 'cate.inc.php';
+require_once 'pro.inc.php';
+require_once 'album.inc.php';
+require_once 'img.func.php';
 connect();
 

@@ -46,3 +46,31 @@ header("content-type:image/gif");
 imagegif($image);
 imagedestroy($image);
 }
+
+
+/*生成缩略图*/
+
+function thumb($filename,$destination=null,$dsc_w=null,$dsc_h=null,$isreservedsource=true,$scale=0.5){
+	list($src_w,$src_h,$imagetype)=getimagesize($filename);
+	if(is_null($dsc_w)||is_null($dsc_h)){
+		$dsc_w=ceil($src_w*$scale);
+		$dsc_h=ceil($src_h*$scale);
+		}
+	$mime=image_type_to_mime_type($imagetype);
+	$createfun=str_replace("/","createfrom",$mime);
+	$outfun=str_replace("/",null,$mime);
+	$src_image=$createfun($filename);
+	$dsc_image=imagecreatetruecolor($dsc_w,$dsc_h);
+	imagecopyresampled($dsc_image,$src_image,0,0,0,0,$dsc_h,$dsc_w,$src_w,$src_h);
+	if($destination&&!file_exists(dirname($destination))){
+		mkdir(dirname($destination),0777,true);
+		}
+		$dstfilename=$destination==null?getunidstr().".".getext($filename):$destination;
+		$outfun($dsc_image,$dstfilename);
+		imagedestroy($src_image);
+		imagedestroy($dsc_image);
+		if(!$isreservedsource){
+			unlink($filename);
+			}
+		return $dstfilename;
+	}
