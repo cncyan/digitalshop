@@ -63,7 +63,7 @@ checklogin();
             </div>
         </div>
 		<div class="main">           
-         <iframe name="myframe" src="main.php" width="100%" id="myframe" scrolling=no height="500" class="mian_con"></frame>
+         <iframe name="myframe" src="main.php" width="100%" id="myframe" scrolling=no height="600" class="mian_con"></frame>
         </div>
 
     </div>

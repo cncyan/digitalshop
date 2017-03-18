@@ -1,7 +1,7 @@
 <?php
 require_once '../lib/string.func.php';
 header("content-type=text/htme;charset=utf-8");
-//文件上传原理
+/*文件上传原理
 function uploadeone($fileinfo,$path="upload",$allowtype=array("jpg","png","gif","txt"),$maxsize=512000,$imgflag=false){
 	if($fileinfo['error']==0){
 		if(!file_exists($path)){                //如果文件夹不存在先创建文件夹
@@ -46,10 +46,12 @@ function uploadeone($fileinfo,$path="upload",$allowtype=array("jpg","png","gif",
 			}
 		return $mes;
 	}
+*/
+
 //文件上传实施应用
 function buildfile(){            //上传文件的集体整合
-    if(!$_FILES){
-		return ;
+	if(!$_FILES){
+		return;
 	}
 	$i=0;
 	foreach($_FILES as $v){
@@ -77,7 +79,7 @@ function douploade($path="upload",$allowtype=array("jpg","png","gif","txt"),$max
 	$i=0;
 	$fileinfos=buildfile();
 	if(!($fileinfos&&is_array($fileinfos))){
-		return ;
+		return;
 	}
 	foreach($fileinfos as $fileinfo){
 		if($fileinfo['error']===UPLOAD_ERR_OK){
@@ -107,29 +109,29 @@ function douploade($path="upload",$allowtype=array("jpg","png","gif","txt"),$max
 				$i++;
 			}
 		}else{
-			switch($fileinfo['error']){
-					case 1:
-						exit("超过了配置文件上传文件的大小");//UPLOAD_ERR_INI_SIZE
-						break;
-					case 2:
-						exit("超过了表单设置上传文件的大小");			//UPLOAD_ERR_FORM_SIZE
-						break;
-					case 3:
-						exit("文件部分被上传");//UPLOAD_ERR_PARTIAL
-						break;
-					case 4:
-						exit("没有文件被上传1111");//UPLOAD_ERR_NO_FILE
-						break;
-					case 6:
-						exit("没有找到临时目录");//UPLOAD_ERR_NO_TMP_DIR
-						break;
-					case 7:
-						exit("文件不可写");//UPLOAD_ERR_CANT_WRITE;
-						break;
-					case 8:
-						exit("由于PHP的扩展程序中断了文件上传");//UPLOAD_ERR_EXTENSION
-						break;
-				}
+				switch($fileinfo['error']){
+						case 1:
+							exit("超过了配置文件上传文件的大小");//UPLOAD_ERR_INI_SIZE
+							break;
+						case 2:
+							exit("超过了表单设置上传文件的大小");			//UPLOAD_ERR_FORM_SIZE
+							break;
+						case 3:
+							exit("文件部分被上传");//UPLOAD_ERR_PARTIAL
+							break;
+						case 4:
+							return;//UPLOAD_ERR_NO_FILE允许不上传照片
+							break;
+						case 6:
+							exit("没有找到临时目录");//UPLOAD_ERR_NO_TMP_DIR
+							break;
+						case 7:
+							exit("文件不可写");//UPLOAD_ERR_CANT_WRITE;
+							break;
+						case 8:
+							exit("由于PHP的扩展程序中断了文件上传");//UPLOAD_ERR_EXTENSION
+							break;
+					}
 			}
 	}
 	return $uploadedFiles;

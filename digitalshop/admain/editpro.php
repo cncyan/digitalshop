@@ -4,6 +4,8 @@ $rows=getallcate();
 if(!$rows){
 	alertmsg("无分类请添加","addcate.php");
 	}
+$id=$_REQUEST['id'];
+$pros=getprobyid($id);
 ?>
 <!doctype html>
 <html>
@@ -22,42 +24,42 @@ if(!$rows){
 </head>
 <body>
 <h3>添加商品</h3>
-<form action="doadminaction.php?act=addpro" method="post" enctype="multipart/form-data">
+<form action="doadminaction.php?act=editpro&id=<?php echo $pros['id'];?>" method="post" enctype="multipart/form-data">
 <table width="70%"  border="1" cellpadding="5" cellspacing="0" bgcolor="#cccccc">
 	<tr>
 		<td align="right">商品名称</td>
-		<td><input type="text" name="pname"  placeholder="请输入商品名称"/></td>
+		<td><input type="text" name="pname" value="<?php echo $pros['pname']?>"/></td>
 	</tr>
 	<tr>
 		<td align="right">商品分类</td>
 		<td>
 		<select name="cid">
         <?php foreach($rows as $row):?>
-        <option value="<?php echo $row['id'];?>"><?php echo $row['cname'];?></option>
+        <option value="<?php echo $row['id'];?>" <?php echo $row['id']==$pros['cid']?"selected='selected'":null;?>><?php echo $row['cname'];?></option>
         <?php endforeach;?>
 		</select>
 		</td>
 	</tr>
 	<tr>
 		<td align="right">商品货号</td>
-		<td><input type="text" name="psn"  placeholder="请输入商品货号"/></td>
+		<td><input type="text" name="psn" value="<?php echo $pros['psn']?>" </td>
 	</tr>
 	<tr>
 		<td align="right">商品数量</td>
-		<td><input type="text" name="pnum"  placeholder="请输入商品数量"/></td>
+		<td><input type="text" name="pnum" value="<?php echo $pros['pnum']?>" </td>
 	</tr>
 	<tr>
 		<td align="right">商品市场价</td>
-		<td><input type="text" name="pprice"  placeholder="请输入商品市场价"/></td>
+		<td><input type="text" name="pprice" value="<?php echo $pros['pprice']?>"</td>
 	</tr>
 	<tr>
 		<td align="right">商品慕课价</td>
-		<td><input type="text" name="cprice"  placeholder="请输入商品慕课价"/></td>
+		<td><input type="text" name="cprice" value="<?php echo $pros['cprice']?>"</td>
 	</tr>
 	<tr>
 		<td align="right">商品描述</td>
 		<td>
-			<textarea name="pdesc" id="editor_id" style="width:100%;height:150px;"></textarea>
+			<textarea name="pdesc" id="editor_id" style="width:100%;height:150px;"><?php echo $pros['pdesc']?></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -68,7 +70,7 @@ if(!$rows){
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2"><input type="submit"  value="发布商品"/></td>
+		<td colspan="2"><input type="submit"  value="修改商品"/></td>
 	</tr>
 </table>
 </form>

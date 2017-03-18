@@ -3,18 +3,20 @@
 数据库的连接
 */
 function connect(){
+	global $link;
 	$link=mysqli_connect(DB_HOST, DB_USER, DB_PWD)or die("数据库连接失败:".mysqli_error($link));
-    mysqli_set_charset($link, DB_CHARSET);
+    mysqli_set_charset($link, DB_CHARSET);	
     mysqli_select_db($link, "cyanshop")or die("指定数据库打开失败");
     return $link;	
 }
 /*数据库的插入*/
 function insert($table,$array){
+	global $link;
 	$keys=join(",",array_keys($array));
 	$vals="'".join("','",array_values($array))."'";
     $sql="insert {$table}({$keys}) values({$vals})";
-	$result=mysqli_query(connect(),$sql);
-	return $result;	
+	$result=mysqli_query($link,$sql);
+	return mysqli_insert_id($link);	
 }
 /*数据库更新*/
 function update($table,$array,$where=null){
@@ -40,7 +42,7 @@ function delt($table,$where){
 /*查询单条数组*/
 function fetchone($sql){
 	$result=mysqli_query(connect(),$sql);
-    $row=mysqli_fetch_assoc($result);	
+    $row=mysqli_fetch_assoc($result);
 	return $row;
 }
 /*多条数组查询*/
@@ -57,7 +59,3 @@ function getresultnum($sql){
 	$rows=mysqli_num_rows($result);
 	return $rows;
 }
-/*获得插入数据的id*/
-function getinsertid(){
-	return mysqli_insert_id(connect());
-	}

@@ -6,7 +6,15 @@ $totalrows=getresultnum($sql);
 $pagesize=2;
 $page=$_REQUEST['page']?$_REQUEST['page']:1;
 $totalpage=ceil($totalrows/$pagesize);
-
+if($page<1||$page==null||!is_numeric($page)){
+		$page=1;
+		}
+	if($page>$totalpage){
+		$page=$totalpage;
+		}
+$offset=($page-1)*$pagesize;
+$sql="select p.id,p.pname,p.psn,p.pnum,p.pprice,p.cprice,p.pdesc,p.pubtime,p.isshow,p.ishot,c.cname from cyan_pro as p join cyan_cate c on p.cid=c.id limit {$offset},{$pagesize}";
+$rows=fetchall($sql);
 ?>
 <!doctype html>
 <html>
@@ -21,13 +29,12 @@ $totalpage=ceil($totalrows/$pagesize);
 </head>
 
 <body>
-<div id="showDetail"  style="display:none;">
-
+<div id="showdetail"  style="display:none;">
 </div>
 <div class="details">
                     <div class="details_operation clearfix">
                         <div class="bui_select">
-                            <input type="button" value="添&nbsp;&nbsp;加" class="add" onclick="addPro()">
+                            <input type="button" value="添&nbsp;&nbsp;加" class="add" onclick="addpro()">
                         </div>
                         <div class="fr">
                             <div class="text">
@@ -64,85 +71,92 @@ $totalpage=ceil($totalrows/$pagesize);
                                 <th width="20%">商品名称</th>
                                 <th width="10%">商品分类</th>
                                 <th width="10%">是否上架</th>
-                                <th width="15%">上架时间</th>
+                                <th width="10%">上架时间</th>
                                 <th width="10%">慕课价格</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
-                        
+                           <?php foreach($rows as $row):?>
                             <tr>
-                                <!--这里的id和for里面的c1 需要循环出来-->
-                                <td><input type="checkbox" id="c" class="check"><label for="c1" class="label"></label></td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                	
+                                <td><input type="checkbox" id="c" class="check">
+                                   <label for="c1" class="label"><?php echo $row['id'];?></label>
                                 </td>
-                                 <td></td>
-                                  <td></td>
+                                <td><?php echo $row['pname'];?></td>
+                                <td><?php echo $row['cname'];?></td>
+                                <td><?php echo $row['isshow']==1?"上架":"下架";?></td>
+                                <td><?php echo date("Y-m-d",$row['pubtime']);?></td>
+                                <td><?php echo $row['cprice'];?>元</td>
                                 <td align="center">
-                                				<input type="button" value="详情" class="btn" onclick="showDetail(')"><input type="button" value="修改" class="btn" onclick=""><input type="button" value="删除" class="btn"onclick="delPro()">
-					                            <div id="s" style="display:none;">
-					                        	<table class="table" cellspacing="0" cellpadding="0">
-					                        		<tr>
-					                        			<td width="20%" align="right">商品名称</td>
-					                        			<td></td>
-					                        		</tr>
-					                        		<tr>
-					                        			<td width="20%"  align="right">商品类别</td>
-					                        			<td></td>
-					                        		</tr>
-					                        		<tr>
-					                        			<td width="20%"  align="right">商品货号</td>
-					                        			<td></td>
-					                        		</tr>
-					                        		<tr>
-					                        			<td width="20%"  align="right">商品数量</td>
-					                        			<td></td>
-					                        		</tr>
-					                        		<tr>
-					                        			<td  width="20%"  align="right">商品价格</td>
-					                        			<td></td>
-					                        		</tr>
-					                        		<tr>
-					                        			<td  width="20%"  align="right">幕课网价格</td>
-					                        			<td></td>
-					                        		</tr>
-					                        		<tr>
-					                        			<td width="20%"  align="right">商品图片</td>
-					                        			<td>
-					                        			<img width="100" height="100" src="uploads/" alt=""/> &nbsp;&nbsp;
-					                        			
-					                        			</td>
-					                        		</tr>
-					                        		<tr>
-					                        			<td width="20%"  align="right">是否上架</td>
-					                        			<td>
-					                        			</td>
-					                        		</tr>
-					                        		<tr>
-					                        			<td width="20%"  align="right">是否热卖</td>
-					                        			<td>
-					                        			</td>
-					                        		</tr>
-					                        	</table>
-					                        	<span style="display:block;width:80%; ">
-					                        	商品描述<br/>
-					                        	</span>
-					                        </div>
-                                
+        <input type="button" value="详情" class="btn" onClick="showdetail(<?php echo $row['id'];?>,'<?php echo $row['pname'];?>')">
+                                    <input type="button" value="修改" class="btn" onclick="editpro(<?php echo $row['id'];?>)">
+                                    <input type="button" value="删除" class="btn"onclick="delpro(<?php echo $row['id'];?>)">
+                                </td>
+                                <td align="center">
+                                     <div id="showdetail<?php echo $row['id'];?>" style="display:none;">
+                                         <table class="table" cellspacing="0" cellpadding="0">
+                                                <tr>
+                                                 <td width="20%" align="right">商品名称</td>
+                                                 <td><?php echo $row['pname'];?></td>
+                                                 </tr>
+                                                  <tr>
+                                                  <td width="20%"  align="right">商品类别</td>
+                                                  <td><?php echo $row['cname'];?></td>
+                                                   </tr>
+                                                   <tr>
+                                                   <td width="20%"  align="right">商品货号</td>
+                                                   <td><?php echo $row['psn'];?></td>
+                                                   </tr>
+                                                   <tr>
+                                                    <td width="20%"  align="right">商品数量</td>
+                                                   <td><?php echo $row['pnum'];?></td>
+                                                   </tr>
+                                                   <tr>
+                                                   <td  width="20%"  align="right">商品价格</td>
+                                                   <td><?php echo $row['pprice'];?></td>
+                                                   </tr>
+                                                   <tr>
+                                                   <td  width="20%"  align="right">幕课网价格</td>
+                                                   <td><?php echo $row['cprice'];?></td>
+                                                   </tr>
+                                                   <tr>
+                                                   <td width="20%"  align="right">商品图片</td>
+                                                   <td>
+                                                   <?php $proimages=getallproimg($row['id']);?>
+                                                   <?php foreach($proimages as $img): ?>
+                                                <img width="100" height="100" src="uploads/<?php echo $img['albumpath'];?>">&nbsp;
+                                                    <?php endforeach;?>
+                                                   </td>
+                                                   </tr>
+                                                   <tr>
+                                                   <td width="20%"  align="right">是否上架</td>
+                                                   <td><?php echo $row['isshow']==1?"上架":"下架";?> </td>
+                                                   </tr>
+                                                   <tr>
+                                                   <td width="20%"  align="right">是否热卖</td>
+                                                   <td><?php echo $row['ishot']==1?"热卖":"正常";?>   </td>
+                                                   </tr>
+                                                 </table>
+                                           <span style="display:block;width:80%;">
+                                                    商品描述<br/>
+                                                    <?php echo $row['pdesc'];?>
+                                           </span>    
+                                          </div>                            
                                 </td>
                             </tr>
+                            <?php endforeach;?>
+                            <?php if($totalrows>$pagesize):?>
                             <tr>
-                            	<td colspan="7"></td>
+                            	<td colspan="7"><?php echo showpage($page, $totalpage);?></td>
                             </tr>
+                            <?php endif;?>
                         </tbody>
                     </table>
-                </div>
+</div>
+
 <script type="text/javascript">
-function showDetail(id,t){
-	$("#showDetail"+id).dialog({
+function showdetail(id,t){
+	$("#showdetail"+id).dialog({
 		  height:"auto",
 	      width: "auto",
 	      position: {my: "center", at: "center",  collision:"fit"},
@@ -154,15 +168,15 @@ function showDetail(id,t){
 	      hide:"explode"
 	});
 }
-	function addPro(){
-		window.location='addPro.php';
+	function addpro(){
+		window.location='addpro.php';
 	}
-	function editPro(id){
-		window.location='editPro.php?id='+id;
+	function editpro(id){
+		window.location='editpro.php?id='+id;
 	}
-	function delPro(id){
-		if(window.confirm("您确认要删除嘛？添加一次不易，且删且珍惜!")){
-			window.location="doAdminAction.php?act=delPro&id="+id;
+	function delpro(id){
+		if(window.confirm("您确认要删除嘛？且删且珍惜!")){
+			window.location="doadminaction.php?act=delpro&id="+id;
 		}
 	}
 	function search(){

@@ -36,8 +36,7 @@ a:hover{
 	height:28px;
 	float:left;
 	overflow:hidden;
-	text-indent:-9999px;
-	background:url(../images/attach.jpg);
+	background:url(../img/attach.jpg);
 }
 
 #selectFileBtn:hover{
@@ -78,8 +77,7 @@ a:hover{
 	width:16px;
 	height:16px;
 	overflow:hidden;
-	text-indent:-9999px;
-	background:url(../images/delete.png);
+	background:url(../img/delete.png);
 }
 
 

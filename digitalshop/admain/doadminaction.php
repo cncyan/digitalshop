@@ -12,7 +12,11 @@ if($act=="logout"){
 			$mes=deladmin($id);
 			}elseif($act=="addpro"){
 				$mes=addpro();
-				}
+				}elseif($act=="editpro"){
+					$mes=editpro($id);
+					}elseif($act=="delpro"){
+						$mes=delpro($id);
+						}
 ?>
 <!doctype html>
 <html>
