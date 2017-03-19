@@ -32,7 +32,7 @@ for($i=1;$i<=$totalpage;$i++){
 	if($page==$i){
 		$p.=" [{$i}] ";
 		}else{
-			$p.="<a href='{$url}?page={$i}'> [{$i}] </a>";
+			$p.="<a href='{$url}?page={$i}{$where}'> [{$i}] </a>";
 			}
 	}
 	$pagestr=$str.$sep.$index.$sep.$prev.$sep.$p.$sep.$next.$sep.$last;

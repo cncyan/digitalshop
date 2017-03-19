@@ -48,8 +48,13 @@ checklogin();
                         <dl>
                             <dd><a href="addpro.php" target="myframe">添加商品</a></dd>
                             <dd><a href="prolist.php" target="myframe">商品列表</a></dd>
-                            <dd><a href="#">订单总是修改</a></dd>
-                            <dd><a href="#">测试内容你看着改</a></dd>
+                        </dl>
+                    </li>
+                    <li>
+                        <h3><span>+</span>用户管理</h3>
+                        <dl>
+                            <dd><a href="adduser.php" target="myframe">添加用户</a></dd>
+                            <dd><a href="userlist.php" target="myframe">用户列表</a></dd>
                         </dl>
                     </li>
 					 <li>

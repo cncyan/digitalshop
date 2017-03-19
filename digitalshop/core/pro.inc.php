@@ -129,15 +129,29 @@ function getallprobyadmin(){
 	$rows=fetchall($sql);
 	return $rows;
 	}*/
-/*获取商品图片*/
-function getallproimg($id){
-	$sql="select * from cyan_album where pid={$id}";
-	$imgs=fetchall($sql);
-	return $imgs;
-	}
+
 /*获取商品通过id*/
 function getprobyid($id){
 	$sql="select p.id,p.pname,p.psn,p.pnum,p.pprice,p.cprice,p.pdesc,p.pubtime,p.isshow,p.ishot,c.cname,p.cid from cyan_pro as p join cyan_cate c on p.cid=c.id where p.id={$id}";
 	$pros=fetchone($sql);
 	return $pros;
+	}
+/*获取商品通过id*/
+function getprobycid($id){
+	$sql="select p.id,p.pname,p.psn,p.pnum,p.pprice,p.cprice,p.pdesc,p.pubtime,p.isshow,p.ishot,c.cname,p.cid from cyan_pro as p join cyan_cate c on p.cid=c.id where p.cid={$id} limit 4";
+	$pros=fetchall($sql);
+	return $pros;
+	}
+/*获取小图片商品通过id*/
+function getprobysmcid($id){
+	$sql="select p.id,p.pname,p.psn,p.pnum,p.pprice,p.cprice,p.pdesc,p.pubtime,p.isshow,p.ishot,c.cname,p.cid from cyan_pro as p join cyan_cate c on p.cid=c.id where p.cid={$id} limit 4,4";
+	$pros=fetchall($sql);
+	return $pros;
+	}
+/*某分类下是否有商品*/
+function checkpro($cid){
+	$sql="select * from cyan_pro where cid={$cid}";
+	//print_r($sql);die;
+	$res=fetchall($sql);
+	return $res;
 	}

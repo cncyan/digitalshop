@@ -7,7 +7,6 @@ if($rows==null){
 	exit;
 	}
 ?>
-?>
 <!doctype html>
 <html>
 <head>
@@ -21,7 +20,7 @@ if($rows==null){
                 <div class="details">
                     <div class="details_operation clearfix">
                         <div class="bui_select">
-                            <input type="button" value="添&nbsp;&nbsp;加" onClick="turnadd()" class="add">
+                            <input type="button" value="添&nbsp;&nbsp;加" onclick="turnadd()" class="add">
                         </div>
                       </div>  
                     <!--表格-->
@@ -39,8 +38,8 @@ if($rows==null){
                                 <td><input type="checkbox" id="c1" class="check">
                                 <label for="c1" class="label"><?php echo $row['id'];?></label></td>
                                 <td><?php echo $row['cname'];?></td>
-                                <td align="center"><input type="button" value="修改" onClick="editcate(<?php echo $row['id'];?>)" class="btn">
-                                <input type="button" value="删除" onClick="delcate(<?php echo $row['id'];?>)" class="btn"></td>
+                                <td align="center"><input type="button" value="修改" onclick="editcate(<?php echo $row['id'];?>)" class="btn">
+                                <input type="button" value="删除" onclick="delcate(<?php echo $row['id'];?>)" class="btn"></td>
                             </tr>
                          <?php endforeach;?>
                          <?php if($totalrows>$pagesize)://sizeof($rows)无效?>

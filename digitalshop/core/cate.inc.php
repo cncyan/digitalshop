@@ -44,11 +44,17 @@ function editcate($id){
 	}
 /*删除类别*/
 function delcate($id){
+	$res=checkpro($id);
+	//var_dump($res);die;
+	if(!$res){
 	if(delt("cyan_cate","id={$id}")){
 		$mes=" 删除成功,  |   <a href='catelist.php'>查看列表</a>";
 		}else{
 			$mes=" 删除失败,  |   <a href='catelist.php'>查看列表</a>";
 			}
 		return $mes;
+	}else{
+		return " 此分类下有商品，先删除商品,  |   <a href='prolist.php'>前往删除商品</a>";
+		}
 	}
 	

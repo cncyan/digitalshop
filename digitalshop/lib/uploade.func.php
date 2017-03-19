@@ -1,5 +1,5 @@
 <?php
-require_once '../lib/string.func.php';
+require_once 'string.func.php';
 header("content-type=text/htme;charset=utf-8");
 /*文件上传原理
 function uploadeone($fileinfo,$path="upload",$allowtype=array("jpg","png","gif","txt"),$maxsize=512000,$imgflag=false){

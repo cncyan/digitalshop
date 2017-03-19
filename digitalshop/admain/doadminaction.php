@@ -16,7 +16,13 @@ if($act=="logout"){
 					$mes=editpro($id);
 					}elseif($act=="delpro"){
 						$mes=delpro($id);
-						}
+						}elseif($act=="adduser"){
+							$mes=adduser();
+							}elseif($act=="edituser"){
+								$mes=edituser($id);
+								}elseif($act=="deluser"){
+								$mes=deluser($id);
+								}
 ?>
 <!doctype html>
 <html>

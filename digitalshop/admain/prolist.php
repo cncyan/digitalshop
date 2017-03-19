@@ -1,7 +1,13 @@
 <?php
 require_once '../include.php';
 checklogin();
-$sql="select p.id,p.pname,p.psn,p.pnum,p.pprice,p.cprice,p.pdesc,p.pubtime,p.isshow,p.ishot,c.cname from cyan_pro as p join cyan_cate c on p.cid=c.id";
+$order=$_REQUEST['order']?$_REQUEST['order']:null;
+//var_dump($order);die;
+$orderby=$order?"order by p.".$order:null;
+$keywords=$_REQUEST['keywords']?$_REQUEST['keywords']:null;
+$where=$keywords?"where p.pname like '%{$keywords}%'":null;
+$sql="select p.id,p.pname,p.psn,p.pnum,p.pprice,p.cprice,p.pdesc,p.pubtime,p.isshow,p.ishot,c.cname from cyan_pro as p join cyan_cate c on p.cid=c.id {$where} {$orderby}";
+//var_dump($sql);die;
 $totalrows=getresultnum($sql);
 $pagesize=2;
 $page=$_REQUEST['page']?$_REQUEST['page']:1;
@@ -13,7 +19,7 @@ if($page<1||$page==null||!is_numeric($page)){
 		$page=$totalpage;
 		}
 $offset=($page-1)*$pagesize;
-$sql="select p.id,p.pname,p.psn,p.pnum,p.pprice,p.cprice,p.pdesc,p.pubtime,p.isshow,p.ishot,c.cname from cyan_pro as p join cyan_cate c on p.cid=c.id limit {$offset},{$pagesize}";
+$sql="select p.id,p.pname,p.psn,p.pnum,p.pprice,p.cprice,p.pdesc,p.pubtime,p.isshow,p.ishot,c.cname from cyan_pro as p join cyan_cate c on p.cid=c.id {$where} {$orderby} limit {$offset},{$pagesize}";
 $rows=fetchall($sql);
 ?>
 <!doctype html>
@@ -40,20 +46,20 @@ $rows=fetchall($sql);
                             <div class="text">
                                 <span>商品价格：</span>
                                 <div class="bui_select">
-                                    <select id="" class="select" onchange="change(this.value)">
+                                    <select id="" class="select" onChange="change(this.value)">
                                     	<option>-请选择-</option>
-                                        <option value="iPrice asc" >由低到高</option>
-                                        <option value="iPrice desc">由高到底</option>
+                                        <option value="cprice asc" >由低到高</option>
+                                        <option value="cprice desc">由高到底</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="text">
                                 <span>上架时间：</span>
                                 <div class="bui_select">
-                                 <select id="" class="select" onchange="change(this.value)">
+                                 <select id="" class="select" onChange="change(this.value)">
                                  	<option>-请选择-</option>
-                                        <option value="pubTime desc" >最新发布</option>
-                                        <option value="pubTime asc">历史发布</option>
+                                    <option value="pubtime desc" >最新发布</option>
+                                    <option value="pubtime asc">历史发布</option>
                                     </select>
                                 </div>
                             </div>
@@ -147,7 +153,7 @@ $rows=fetchall($sql);
                             <?php endforeach;?>
                             <?php if($totalrows>$pagesize):?>
                             <tr>
-                            	<td colspan="7"><?php echo showpage($page, $totalpage);?></td>
+                            	<td colspan="7"><?php echo showpage($page, $totalpage,"keywords={$keywords}&order={$order}");?></td>
                             </tr>
                             <?php endif;?>
                         </tbody>
@@ -181,13 +187,13 @@ function showdetail(id,t){
 	}
 	function search(){
 		if(event.keyCode==13){
-			var val=document.getElementById("search").value;
-			window.location="listPro.php?keywords="+val;
+			var val=$('#search').val();
+			window.location="prolist.php?keywords="+val;
+			}
 		}
-	}
 	function change(val){
-		window.location="listPro.php?order="+val;
-	}
+		window.location="prolist.php?order="+val;
+		}
 </script>
 </body>
 </html>
