@@ -3,8 +3,10 @@ require_once "include.php";
 $act=$_REQUEST['act'];
 if($act=="reg"){
 	$mes=reg();
-}elseif($act=="adduser"){
-	$mes=adduser();
+}elseif($act=="login"){
+	$mes=login();
+	}elseif($act=="out"){
+	$mes=userout();
 	}
 ?>
 <!doctype html>

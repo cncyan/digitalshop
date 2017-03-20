@@ -21,4 +21,29 @@ function reg(){
 			}
 	return $mes;
 	}
-	
+
+function login(){
+	$username=$_POST['username'];
+	$password=md5($_POST['password']);
+	$sql="select * from cyan_user where username='{$username}' and password='{$password}'";
+	$row=fetchOne($sql);
+	if($row){
+		$_SESSION['loginflag']=$row['id'];
+		$_SESSION['username']=$row['username'];
+		$mes="登陆成功！<br/>3秒钟后跳转到首页<meta http-equiv='refresh' content='3;url=index.php'/>";
+	}else{
+		$mes="登陆失败！<a href='login.php'>重新登陆</a>";
+	}
+	return $mes;
+}
+
+function userout(){
+	$_SESSION=array();
+	if(isset($_COOKIE[session_name()])){
+		setcookie(session_name(),"",time()-1);
+	}
+
+	session_destroy();
+	header("location:index.php");
+	}
+

@@ -4,6 +4,7 @@ $cates=getallcate();
 if(!($cates&&is_array($cates))){
 	echo "<script> alert '无商品分类';</script>";
 	}
+
 ?>
 <!doctype html>
 <html>
@@ -23,17 +24,23 @@ if(!($cates&&is_array($cates))){
 	<div class="topBar">
 		<div class="comWidth">
 			<div class="leftArea">
-				<a href="#" class="collection">收藏慕课</a>
+				<a href="#" class="collection">收藏cyan</a>
 			</div>
+            <?php if($_SESSION['loginflag']!=1):?>
 			<div class="rightArea">
-				欢迎来到慕课网！<a href="login.php">[登录]</a><a href="registe.php">[免费注册]</a>
+				欢迎来到CyanScikit！<a href="login.php">[登录]</a><a href="registe.php">[免费注册]</a>
 			</div>
+            <?php endif; if($_SESSION['loginflag']==1):?>
+            <div class="rightArea">
+				欢迎来到CyanScikit！ <?php echo $_SESSION['username'];?>  <a href="doaction.php?act=out">  [退出登录]</a>
+			</div>
+            <?php endif;?>
 		</div>
 	</div>
 	<div class="logoBar">
 		<div class="comWidth">
 			<div class="logo fl">
-				<a href="#"><img src="img/logo.jpg" alt="慕课网"></a>
+				<a href="#"><img src="img/logo.jpg" alt="CyanScikit"></a>
 			</div>
 			<div class="search_box fl">
 				<input type="text" class="search_text fl">
@@ -50,35 +57,12 @@ if(!($cates&&is_array($cates))){
 			<div class="shopClass fl">
 				<h3>全部商品分类<i class="shopClass_icon"></i></h3>
 				<div class="shopClass_show">
-					<dl class="shopClass_item">
-						<dt><a href="#" class="b">手机</a> <a href="#" class="b">数码</a> <a href="#" class="aLink">合约机</a></dt>
-						<dd><a href="#">荣耀3X</a> <a href="#">单反</a> <a href="#">智能设备</a></dd>
-					</dl>
-					<dl class="shopClass_item">
-						<dt><a href="#" class="b">手机</a> <a href="#" class="b">数码</a> <a href="#" class="aLink">合约机</a></dt>
-						<dd><a href="#">荣耀3X</a> <a href="#">单反</a> <a href="#">智能设备</a></dd>
-					</dl>
-					<dl class="shopClass_item">
-						<dt><a href="#" class="b">手机</a> <a href="#" class="b">数码</a> <a href="#" class="aLink">合约机</a></dt>
-						<dd><a href="#">荣耀3X</a> <a href="#">单反</a> <a href="#">智能设备</a></dd>
-					</dl>
-					<dl class="shopClass_item">
-						<dt><a href="#" class="b">手机</a> <a href="#" class="b">数码</a> <a href="#" class="aLink">合约机</a></dt>
-						<dd><a href="#">荣耀3X</a> <a href="#">单反</a> <a href="#">智能设备</a></dd>
-					</dl>
-					<dl class="shopClass_item">
-						<dt><a href="#" class="b">手机</a> <a href="#" class="b">数码</a> <a href="#" class="aLink">合约机</a></dt>
-						<dd><a href="#">荣耀3X</a> <a href="#">单反</a> <a href="#">智能设备</a></dd>
-					</dl>
-				</div>
-				<div class="shopClass_list hide">
+                 <dl class="shopClass_item">
+						<dt><a href="#" class="b">手机</a></dt>
+					</dl>		
+                
+				<div class="shopClass_list" style="z-index:9999; display:none">
 					<div class="shopClass_cont">
-						<dl class="shopList_item">
-							<dt>电脑装机</dt>
-							<dd>
-								<a href="#">文字啊</a><a href="#">文字字啊</a><a href="#">文字字字啊</a><a href="#">文字啊</a><a href="#">文字</a><a href="#">文字啊</a>
-							</dd>
-						</dl>
 						<dl class="shopList_item">
 							<dt>电脑装机</dt>
 							<dd>
@@ -106,8 +90,47 @@ if(!($cates&&is_array($cates))){
 						<div class="shopList_links">
 							<a href="#">文字测试内容等等<span></span></a><a href="#">文字容等等<span></span></a>
 						</div>
-					</div>
-				</div>
+					</div>                    
+                    </div>
+				</div><!--showclass_show-->
+                
+                <div class="shopClass_show">
+                 <dl class="shopClass_item">
+						<dt><a href="#" class="b">手机</a></dt>
+					</dl>              
+				<div class="shopClass_list" style="display:none">
+					<div class="shopClass_cont">
+						<dl class="shopList_item">
+							<dt>电机</dt>
+							<dd>
+								<a href="#">文字啊</a><a href="#">文字字啊</a><a href="#">文字字字啊</a><a href="#">文字啊</a><a href="#">文字</a><a href="#">文字啊</a><a href="#">文字啊</a><a href="#">文字字啊</a><a href="#">文字字字啊</a><a href="#">文字啊</a><a href="#">文字</a><a href="#">文字啊</a><a href="#">文字啊</a>
+							</dd>
+						</dl>
+						<dl class="shopList_item">
+							<dt>电装机</dt>
+							<dd>
+								<a href="#">文字啊</a><a href="#">文字字啊</a><a href="#">文字字字啊</a><a href="#">文字啊</a><a href="#">文字</a><a href="#">文字啊</a><a href="#">文字啊</a><a href="#">文字字啊</a><a href="#">文字字字啊</a><a href="#">文字啊</a><a href="#">文字</a><a href="#">文字啊</a><a href="#">文字啊</a>
+							</dd>
+						</dl>
+						<dl class="shopList_item">
+							<dt>电装机</dt>
+							<dd>
+								<a href="#">文字啊</a><a href="#">文字字啊</a><a href="#">文字字字啊</a><a href="#">文字啊</a><a href="#">文字</a><a href="#">文字啊</a><a href="#">文字啊</a><a href="#">文字字啊</a><a href="#">文字字字啊</a><a href="#">文字啊</a><a href="#">文字</a><a href="#">文字啊</a><a href="#">文字啊</a>
+							</dd>
+						</dl>
+						<dl class="shopList_item">
+							<dt>电装机</dt>
+							<dd>
+								<a href="#">文字啊</a><a href="#">文字字啊</a><a href="#">文字字字啊</a><a href="#">文字啊</a><a href="#">文字</a><a href="#">文字啊</a><a href="#">文字啊</a><a href="#">文字字啊</a><a href="#">文字字字啊</a><a href="#">文字啊</a><a href="#">文字</a><a href="#">文字啊</a><a href="#">文字啊</a>
+							</dd>
+						</dl>
+						<div class="shopList_links">
+							<a href="#">文字测试内容等等<span></span></a><a href="#">文字容等等<span></span></a>
+						</div>
+					</div>                    
+                    </div>
+				</div><!--showclass_show-->
+                
 			</div>
 			<ul class="nav fl">
 				<li><a href="#" class="active">数码城</a></li>
@@ -122,12 +145,21 @@ if(!($cates&&is_array($cates))){
 </div>
 <div class="banner comWidth clearfix">
 	<div class="banner_bar banner_big">
-		<ul class="imgBox">
-			<li><a href="#"><img src="img/banner/banner_01.jpg" alt="banner"></a></li>
-			<li><a href="#"><img src="img/banner/banner_02.jpg" alt="banner"></a></li>
-		</ul>
-		<div class="imgNum">
-			<a href="#" class="active"></a><a href="#"></a><a href="#"></a><a href="#"></a>
+		<div class="imgBox" id="box">
+			 <ul class="list">
+                    <li class="current"><img src="img/banner/banner_sm_02.jpg"/></li>
+                    <li><img src="img/banner/banner_sm_01.jpg"/></li>
+                    <li><img src="img/banner/banner_sm_02.jpg"/></li>
+                    <li><img src="img/banner/banner_sm_01.jpg"/></li>
+                    <li><img src="img/banner/banner_sm_02.jpg"/></li>
+                </ul>
+                <ul class="count">
+                    <li class="current">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                </ul>
 		</div>
 	</div>
 </div>
@@ -194,9 +226,22 @@ if(!($cates&&is_array($cates))){
 <?php endforeach;?>
 <div class="hr_25"></div>
 <div class="footer">
-	<p><a href="#">慕课简介</a><i>|</i><a href="#">慕课公告</a><i>|</i> <a href="#">招纳贤士</a><i>|</i><a href="#">联系我们</a><i>|</i>客服热线：400-675-1234</p>
-	<p>Copyright &copy; 2006 - 2014 慕课版权所有&nbsp;&nbsp;&nbsp;京ICP备09037834号&nbsp;&nbsp;&nbsp;京ICP证B1034-8373号&nbsp;&nbsp;&nbsp;某市公安局XX分局备案编号：123456789123</p>
+	<p><a href="#">CyanScikit简介</a><i>|</i><a href="#">CyanScikit公告</a><i>|</i> <a href="#">招纳贤士</a><i>|</i><a href="#">联系我们</a><i>|</i>客服热线：400-675-1234</p>
+	<p>Copyright &copy; 2006 - 2014 cyanscikit版权所有&nbsp;&nbsp;&nbsp;京ICP备09037834号&nbsp;&nbsp;&nbsp;京ICP证B234-8373号&nbsp;&nbsp;&nbsp;某市公安局XX分局备案编号：123456789123</p>
 	<p class="web"><a href="#"><img src="img/webLogo.jpg" alt="logo"></a><a href="#"><img src="img/webLogo.jpg" alt="logo"></a><a href="#"><img src="img/webLogo.jpg" alt="logo"></a><a href="#"><img src="img/webLogo.jpg" alt="logo"></a></p>
 </div>
+<script type="text/javascript" src="admain/js/jquery-1.6.4.js"></script>
+<script src="js/slider.js"></script>
+<script type="text/javascript">
+ $(function(){
+	 $("div.shopClass_show").hover(function(){
+		 $(this).find(".shopClass_list").stop().animate({left:"190",opacity:1},"fast").css({"display":"block","z-index":"9999"});
+		 $(this).find(">dl.shopClass_item dt a").addClass("aLink");
+		 },function(){
+			 $(this).find(".shopClass_list").stop().animate({opacity:0},"fast").css("z-index","-1");
+		     $(this).find(">dl.shopClass_item dt a").removeClass("aLink");
+			 })
+	 });
+</script>
 </body>
 </html>
